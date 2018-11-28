@@ -1,2 +1,2 @@
-# ControlApp_Beta
-Receipts
+# ControlApp
+
