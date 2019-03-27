@@ -12,7 +12,7 @@ namespace ControlApp.DataAccess.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -43,6 +43,17 @@ namespace ControlApp.DataAccess.Properties {
         public string ControlAppDevConnectionString {
             get {
                 return ((string)(this["ControlAppDevConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.30.206;Initial Catalog=ControlApp;User ID=sa;Password=GEServe" +
+            "rD3;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
+        public string ControlAppConnectionString {
+            get {
+                return ((string)(this["ControlAppConnectionString"]));
             }
         }
     }

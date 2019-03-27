@@ -45,7 +45,7 @@ namespace ControlApp.OnPremises.Panels
         string pIdSession = MystaticValues.IdSession;
 
         //Variables for get the Price and ID of Product
-        int gIdPrice_Tag = 0;
+        int gIdPrice_Tag = 0; //Current Product Avaliable 
         decimal gUnit_Price = 0;
 
         // Logger Logic Variable
@@ -72,6 +72,7 @@ namespace ControlApp.OnPremises.Panels
             LoadDataGridCustomer();
             LoadDataGridPrepaid();
             LoadtxtCustomerPrepaid(txtNCustomerPrepaid);
+            btnStock.PerformClick();
             btnPrint.Enabled = false;
             btnDelete.Enabled = false;
         }
@@ -621,12 +622,91 @@ namespace ControlApp.OnPremises.Panels
         /// </CrudPrepaid>
 
         /// <CrudStock>
-        public void CreateStock()
+        private void btnStock_Click(object sender, EventArgs e)
         {
-
+            if (LoadStateBtnStock() == true)
+            {
+                MetroMessageBox.Show(this, "Ya existe un inventario activo",
+                    "Error en Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+                pnlStock.Visible = true;
         }
-        /// </CrudStock>
+        private void btnOCStock_Click(object sender, EventArgs e)
+        {
+            int InitialQuantity = Convert.ToInt32(txtQuantityInitialStock.Text);
+            int ReservedRoute = Convert.ToInt32(txtReservedRouteStock.Text);
+            int Prepaid = Convert.ToInt32(txtPrepaidStock.Text);
+            int stock = Convert.ToInt32(InitialQuantity) + Convert.ToInt32(ReservedRoute) + Convert.ToInt32(Prepaid);
+            if (InitialQuantity == 0)
+            {
+                MetroMessageBox.Show(this, "La Cantidad -" + InitialQuantity + "- no es Valida. \n Favor Digite un valor Valido", "Error en Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtQuantityInitialStock.Focus();
+                return;
+            }
+            if (ReservedRoute == 0)
+            {
+                MetroMessageBox.Show(this, "La Cantidad -" + ReservedRoute + "- no es Valida. \n Favor Digite un valor Valido", "Error en Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNCustomer.Focus();
+                return;
+            }
 
+            try
+            {
+                ObjStock.Stock_Initial_Quantity = stock;
+                ObjStock.Stock_Quantity = stock;
+                ObjStock.Id_Product = gIdPrice_Tag;
+                ObjStock.CreateBy = pIdSession;
+                ApiAccess_Stock.Create(ObjStock);
+                btnStock.Style = MetroFramework.MetroColorStyle.Red;
+                btnStock.Text = "Cerrar";
+                pnlStock.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, "Error Al momento de Agregar",
+                    "Error en Crud Create" + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            CleanFieldsStock();
+        }
+        private bool CheckStateStock()
+        {
+            bool status = false;
+            try
+            {
+                var ListStock = ApiAccess_Stock.SuperRetrieve<Stock>();
+                foreach (Stock element in ListStock)
+                {
+                    if (element.State == true)
+                    {
+                        return status = true; // Load the status of the stock of the day just only one can be true
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, "Error Al momento de Consultar el Stock",
+                    "Error en Busqueda" + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            return status;
+        }
+        private bool LoadStateBtnStock()
+        {
+            bool state = false;
+            if(CheckStateStock() == false)
+            {
+                btnStock.Style = MetroFramework.MetroColorStyle.Green;
+                btnStock.Text = "Abrir Stock";
+                state = false;
+            }
+            else
+            {
+                btnStock.Style = MetroFramework.MetroColorStyle.Red;
+                btnStock.Text = "Cerrar Stock";
+                state = true;
+            }
+            return state;
+        } 
+        /// </CrudStock>
         /// <CrudOrder>
         /// Create
         private void btnCreateOrden_Click(object sender, EventArgs e)
@@ -1089,8 +1169,13 @@ namespace ControlApp.OnPremises.Panels
             txtSearchRetreat.Text = "";
             txtCustomerRetreat.Text = "";
         }
+        public void CleanFieldsStock()
+        {
+            txtQuantityInitialStock.Text = "";
+            txtReservedRouteStock.Text = "";
+            txtPrepaidStock.Text = "";
+        }
         /// </Eventpnl> 
-
         /// <RptEvents>
         private void GetIdSsrs() // Principal Flow
         {
@@ -1131,17 +1216,6 @@ namespace ControlApp.OnPremises.Panels
         private void btnPrint_Click(object sender, EventArgs e)
         {
             PrintAF();
-        }
-        private void btnStock_Click(object sender, EventArgs e)
-        {
-            
-            pnlStock.Visible = true;
-        }
-        private void btnOCStock_Click(object sender, EventArgs e)
-        {
-            btnStock.Style = MetroFramework.MetroColorStyle.Red;
-            btnStock.Text = "Cerrar";
-            pnlStock.Visible = false;
         }
         private void mtoggleOrder_CheckedChanged(object sender, EventArgs e)
         {
@@ -1207,7 +1281,6 @@ namespace ControlApp.OnPremises.Panels
                     "Error en Validación" + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-
         private void txtCashPrepaid_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))

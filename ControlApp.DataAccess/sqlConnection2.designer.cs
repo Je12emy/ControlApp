@@ -22,7 +22,7 @@ namespace ControlApp.DataAccess
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ControlAppDev")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ControlApp")]
 	public partial class sqlConnectionDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -66,16 +66,16 @@ namespace ControlApp.DataAccess
     partial void InsertTBL_SESSION(TBL_SESSION instance);
     partial void UpdateTBL_SESSION(TBL_SESSION instance);
     partial void DeleteTBL_SESSION(TBL_SESSION instance);
-    partial void InsertTBL_STOCK(TBL_STOCK instance);
-    partial void UpdateTBL_STOCK(TBL_STOCK instance);
-    partial void DeleteTBL_STOCK(TBL_STOCK instance);
     partial void InsertTBL_USER(TBL_USER instance);
     partial void UpdateTBL_USER(TBL_USER instance);
     partial void DeleteTBL_USER(TBL_USER instance);
+    partial void InsertTBL_STOCK(TBL_STOCK instance);
+    partial void UpdateTBL_STOCK(TBL_STOCK instance);
+    partial void DeleteTBL_STOCK(TBL_STOCK instance);
     #endregion
 		
 		public sqlConnectionDataContext() : 
-				base(global::ControlApp.DataAccess.Properties.Settings.Default.ControlAppDevConnectionString, mappingSource)
+				base(global::ControlApp.DataAccess.Properties.Settings.Default.ControlAppConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -216,19 +216,19 @@ namespace ControlApp.DataAccess
 			}
 		}
 		
-		public System.Data.Linq.Table<TBL_STOCK> TBL_STOCKs
-		{
-			get
-			{
-				return this.GetTable<TBL_STOCK>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TBL_USER> TBL_USERs
 		{
 			get
 			{
 				return this.GetTable<TBL_USER>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_STOCK> TBL_STOCKs
+		{
+			get
+			{
+				return this.GetTable<TBL_STOCK>();
 			}
 		}
 		
@@ -316,18 +316,18 @@ namespace ControlApp.DataAccess
 			return ((ISingleResult<SP_CRUD_ROLE_PERResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_CRUD_STOCK")]
-		public ISingleResult<SP_CRUD_STOCKResult> SP_CRUD_STOCK([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> p_ACTION, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pID_BY, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pID_STOCK, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pID_PRODUCT, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pSTOCK_INITIAL_QUANTITY, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pSTOCK_QUANTITY, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pSTOCK_ADJUSTMENT, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> pSTOCK_DATE_PRODUCT)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), p_ACTION, pID_BY, pID_STOCK, pID_PRODUCT, pSTOCK_INITIAL_QUANTITY, pSTOCK_QUANTITY, pSTOCK_ADJUSTMENT, pSTOCK_DATE_PRODUCT);
-			return ((ISingleResult<SP_CRUD_STOCKResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_CRUD_USER")]
 		public ISingleResult<SP_CRUD_USERResult> SP_CRUD_USER([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> p_ACTION, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pID_BY, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(30)")] string pID_USER, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(150)")] string pUSER_NAME, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(150)")] string pUSER_EMAIL, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pID_DPT, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pID_AREA, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pID_PST, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pID_ROLE, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(15)")] string pUSER_NICKNAME, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(15)")] string pUSER_PASSWORD)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), p_ACTION, pID_BY, pID_USER, pUSER_NAME, pUSER_EMAIL, pID_DPT, pID_AREA, pID_PST, pID_ROLE, pUSER_NICKNAME, pUSER_PASSWORD);
 			return ((ISingleResult<SP_CRUD_USERResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_CRUD_STOCK")]
+		public ISingleResult<SP_CRUD_STOCKResult> SP_CRUD_STOCK([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> p_ACTION, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pID_BY, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pID_STOCK, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pID_PRODUCT, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pSTOCK_INITIAL_QUANTITY, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pSTOCK_QUANTITY, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pSTOCK_ADJUSTMENT, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> pSTOCK_DATE_PRODUCT)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), p_ACTION, pID_BY, pID_STOCK, pID_PRODUCT, pSTOCK_INITIAL_QUANTITY, pSTOCK_QUANTITY, pSTOCK_ADJUSTMENT, pSTOCK_DATE_PRODUCT);
+			return ((ISingleResult<SP_CRUD_STOCKResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -4793,390 +4793,6 @@ namespace ControlApp.DataAccess
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_STOCK")]
-	public partial class TBL_STOCK : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_STOCK;
-		
-		private int _ID_PRODUCT;
-		
-		private int _STOCK_INITIAL_QUANTITY;
-		
-		private int _STOCK_QUANTITY;
-		
-		private int _STOCK_ADJUSTMENT;
-		
-		private System.DateTime _STOCK_DATE_PRODUCT;
-		
-		private bool _STOCK_STATE;
-		
-		private string _STOCK_CREATEBY;
-		
-		private string _STOCK_UPDATEDBY;
-		
-		private System.DateTime _STOCK_CREATEDATE;
-		
-		private System.Nullable<System.DateTime> _STOCK_UPDATEDATE;
-		
-		private EntityRef<TBL_PRODUCT> _TBL_PRODUCT;
-		
-		private EntityRef<TBL_USER> _TBL_USER;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_STOCKChanging(int value);
-    partial void OnID_STOCKChanged();
-    partial void OnID_PRODUCTChanging(int value);
-    partial void OnID_PRODUCTChanged();
-    partial void OnSTOCK_INITIAL_QUANTITYChanging(int value);
-    partial void OnSTOCK_INITIAL_QUANTITYChanged();
-    partial void OnSTOCK_QUANTITYChanging(int value);
-    partial void OnSTOCK_QUANTITYChanged();
-    partial void OnSTOCK_ADJUSTMENTChanging(int value);
-    partial void OnSTOCK_ADJUSTMENTChanged();
-    partial void OnSTOCK_DATE_PRODUCTChanging(System.DateTime value);
-    partial void OnSTOCK_DATE_PRODUCTChanged();
-    partial void OnSTOCK_STATEChanging(bool value);
-    partial void OnSTOCK_STATEChanged();
-    partial void OnSTOCK_CREATEBYChanging(string value);
-    partial void OnSTOCK_CREATEBYChanged();
-    partial void OnSTOCK_UPDATEDBYChanging(string value);
-    partial void OnSTOCK_UPDATEDBYChanged();
-    partial void OnSTOCK_CREATEDATEChanging(System.DateTime value);
-    partial void OnSTOCK_CREATEDATEChanged();
-    partial void OnSTOCK_UPDATEDATEChanging(System.Nullable<System.DateTime> value);
-    partial void OnSTOCK_UPDATEDATEChanged();
-    #endregion
-		
-		public TBL_STOCK()
-		{
-			this._TBL_PRODUCT = default(EntityRef<TBL_PRODUCT>);
-			this._TBL_USER = default(EntityRef<TBL_USER>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_STOCK", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID_STOCK
-		{
-			get
-			{
-				return this._ID_STOCK;
-			}
-			set
-			{
-				if ((this._ID_STOCK != value))
-				{
-					this.OnID_STOCKChanging(value);
-					this.SendPropertyChanging();
-					this._ID_STOCK = value;
-					this.SendPropertyChanged("ID_STOCK");
-					this.OnID_STOCKChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_PRODUCT", DbType="Int NOT NULL")]
-		public int ID_PRODUCT
-		{
-			get
-			{
-				return this._ID_PRODUCT;
-			}
-			set
-			{
-				if ((this._ID_PRODUCT != value))
-				{
-					if (this._TBL_PRODUCT.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_PRODUCTChanging(value);
-					this.SendPropertyChanging();
-					this._ID_PRODUCT = value;
-					this.SendPropertyChanged("ID_PRODUCT");
-					this.OnID_PRODUCTChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_INITIAL_QUANTITY", DbType="Int NOT NULL")]
-		public int STOCK_INITIAL_QUANTITY
-		{
-			get
-			{
-				return this._STOCK_INITIAL_QUANTITY;
-			}
-			set
-			{
-				if ((this._STOCK_INITIAL_QUANTITY != value))
-				{
-					this.OnSTOCK_INITIAL_QUANTITYChanging(value);
-					this.SendPropertyChanging();
-					this._STOCK_INITIAL_QUANTITY = value;
-					this.SendPropertyChanged("STOCK_INITIAL_QUANTITY");
-					this.OnSTOCK_INITIAL_QUANTITYChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_QUANTITY", DbType="Int NOT NULL")]
-		public int STOCK_QUANTITY
-		{
-			get
-			{
-				return this._STOCK_QUANTITY;
-			}
-			set
-			{
-				if ((this._STOCK_QUANTITY != value))
-				{
-					this.OnSTOCK_QUANTITYChanging(value);
-					this.SendPropertyChanging();
-					this._STOCK_QUANTITY = value;
-					this.SendPropertyChanged("STOCK_QUANTITY");
-					this.OnSTOCK_QUANTITYChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_ADJUSTMENT", DbType="Int NOT NULL")]
-		public int STOCK_ADJUSTMENT
-		{
-			get
-			{
-				return this._STOCK_ADJUSTMENT;
-			}
-			set
-			{
-				if ((this._STOCK_ADJUSTMENT != value))
-				{
-					this.OnSTOCK_ADJUSTMENTChanging(value);
-					this.SendPropertyChanging();
-					this._STOCK_ADJUSTMENT = value;
-					this.SendPropertyChanged("STOCK_ADJUSTMENT");
-					this.OnSTOCK_ADJUSTMENTChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_DATE_PRODUCT", DbType="DateTime NOT NULL")]
-		public System.DateTime STOCK_DATE_PRODUCT
-		{
-			get
-			{
-				return this._STOCK_DATE_PRODUCT;
-			}
-			set
-			{
-				if ((this._STOCK_DATE_PRODUCT != value))
-				{
-					this.OnSTOCK_DATE_PRODUCTChanging(value);
-					this.SendPropertyChanging();
-					this._STOCK_DATE_PRODUCT = value;
-					this.SendPropertyChanged("STOCK_DATE_PRODUCT");
-					this.OnSTOCK_DATE_PRODUCTChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_STATE", DbType="Bit NOT NULL")]
-		public bool STOCK_STATE
-		{
-			get
-			{
-				return this._STOCK_STATE;
-			}
-			set
-			{
-				if ((this._STOCK_STATE != value))
-				{
-					this.OnSTOCK_STATEChanging(value);
-					this.SendPropertyChanging();
-					this._STOCK_STATE = value;
-					this.SendPropertyChanged("STOCK_STATE");
-					this.OnSTOCK_STATEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_CREATEBY", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string STOCK_CREATEBY
-		{
-			get
-			{
-				return this._STOCK_CREATEBY;
-			}
-			set
-			{
-				if ((this._STOCK_CREATEBY != value))
-				{
-					if (this._TBL_USER.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSTOCK_CREATEBYChanging(value);
-					this.SendPropertyChanging();
-					this._STOCK_CREATEBY = value;
-					this.SendPropertyChanged("STOCK_CREATEBY");
-					this.OnSTOCK_CREATEBYChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_UPDATEDBY", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string STOCK_UPDATEDBY
-		{
-			get
-			{
-				return this._STOCK_UPDATEDBY;
-			}
-			set
-			{
-				if ((this._STOCK_UPDATEDBY != value))
-				{
-					this.OnSTOCK_UPDATEDBYChanging(value);
-					this.SendPropertyChanging();
-					this._STOCK_UPDATEDBY = value;
-					this.SendPropertyChanged("STOCK_UPDATEDBY");
-					this.OnSTOCK_UPDATEDBYChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_CREATEDATE", DbType="DateTime NOT NULL")]
-		public System.DateTime STOCK_CREATEDATE
-		{
-			get
-			{
-				return this._STOCK_CREATEDATE;
-			}
-			set
-			{
-				if ((this._STOCK_CREATEDATE != value))
-				{
-					this.OnSTOCK_CREATEDATEChanging(value);
-					this.SendPropertyChanging();
-					this._STOCK_CREATEDATE = value;
-					this.SendPropertyChanged("STOCK_CREATEDATE");
-					this.OnSTOCK_CREATEDATEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_UPDATEDATE", DbType="DateTime")]
-		public System.Nullable<System.DateTime> STOCK_UPDATEDATE
-		{
-			get
-			{
-				return this._STOCK_UPDATEDATE;
-			}
-			set
-			{
-				if ((this._STOCK_UPDATEDATE != value))
-				{
-					this.OnSTOCK_UPDATEDATEChanging(value);
-					this.SendPropertyChanging();
-					this._STOCK_UPDATEDATE = value;
-					this.SendPropertyChanged("STOCK_UPDATEDATE");
-					this.OnSTOCK_UPDATEDATEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBL_PRODUCT_TBL_STOCK", Storage="_TBL_PRODUCT", ThisKey="ID_PRODUCT", OtherKey="ID_PRODUCT", IsForeignKey=true)]
-		public TBL_PRODUCT TBL_PRODUCT
-		{
-			get
-			{
-				return this._TBL_PRODUCT.Entity;
-			}
-			set
-			{
-				TBL_PRODUCT previousValue = this._TBL_PRODUCT.Entity;
-				if (((previousValue != value) 
-							|| (this._TBL_PRODUCT.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TBL_PRODUCT.Entity = null;
-						previousValue.TBL_STOCKs.Remove(this);
-					}
-					this._TBL_PRODUCT.Entity = value;
-					if ((value != null))
-					{
-						value.TBL_STOCKs.Add(this);
-						this._ID_PRODUCT = value.ID_PRODUCT;
-					}
-					else
-					{
-						this._ID_PRODUCT = default(int);
-					}
-					this.SendPropertyChanged("TBL_PRODUCT");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBL_USER_TBL_STOCK", Storage="_TBL_USER", ThisKey="STOCK_CREATEBY", OtherKey="ID_USER", IsForeignKey=true)]
-		public TBL_USER TBL_USER
-		{
-			get
-			{
-				return this._TBL_USER.Entity;
-			}
-			set
-			{
-				TBL_USER previousValue = this._TBL_USER.Entity;
-				if (((previousValue != value) 
-							|| (this._TBL_USER.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TBL_USER.Entity = null;
-						previousValue.TBL_STOCKs.Remove(this);
-					}
-					this._TBL_USER.Entity = value;
-					if ((value != null))
-					{
-						value.TBL_STOCKs.Add(this);
-						this._STOCK_CREATEBY = value.ID_USER;
-					}
-					else
-					{
-						this._STOCK_CREATEBY = default(string);
-					}
-					this.SendPropertyChanged("TBL_USER");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_USER")]
 	public partial class TBL_USER : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -5936,6 +5552,390 @@ namespace ControlApp.DataAccess
 		{
 			this.SendPropertyChanging();
 			entity.TBL_USER = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_STOCK")]
+	public partial class TBL_STOCK : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_STOCK;
+		
+		private int _ID_PRODUCT;
+		
+		private int _STOCK_INITIAL_QUANTITY;
+		
+		private int _STOCK_QUANTITY;
+		
+		private System.Nullable<int> _STOCK_ADJUSTMENT;
+		
+		private System.DateTime _STOCK_DATE_PRODUCT;
+		
+		private bool _STOCK_STATE;
+		
+		private string _STOCK_CREATEBY;
+		
+		private string _STOCK_UPDATEDBY;
+		
+		private System.DateTime _STOCK_CREATEDATE;
+		
+		private System.Nullable<System.DateTime> _STOCK_UPDATEDATE;
+		
+		private EntityRef<TBL_PRODUCT> _TBL_PRODUCT;
+		
+		private EntityRef<TBL_USER> _TBL_USER;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_STOCKChanging(int value);
+    partial void OnID_STOCKChanged();
+    partial void OnID_PRODUCTChanging(int value);
+    partial void OnID_PRODUCTChanged();
+    partial void OnSTOCK_INITIAL_QUANTITYChanging(int value);
+    partial void OnSTOCK_INITIAL_QUANTITYChanged();
+    partial void OnSTOCK_QUANTITYChanging(int value);
+    partial void OnSTOCK_QUANTITYChanged();
+    partial void OnSTOCK_ADJUSTMENTChanging(System.Nullable<int> value);
+    partial void OnSTOCK_ADJUSTMENTChanged();
+    partial void OnSTOCK_DATE_PRODUCTChanging(System.DateTime value);
+    partial void OnSTOCK_DATE_PRODUCTChanged();
+    partial void OnSTOCK_STATEChanging(bool value);
+    partial void OnSTOCK_STATEChanged();
+    partial void OnSTOCK_CREATEBYChanging(string value);
+    partial void OnSTOCK_CREATEBYChanged();
+    partial void OnSTOCK_UPDATEDBYChanging(string value);
+    partial void OnSTOCK_UPDATEDBYChanged();
+    partial void OnSTOCK_CREATEDATEChanging(System.DateTime value);
+    partial void OnSTOCK_CREATEDATEChanged();
+    partial void OnSTOCK_UPDATEDATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnSTOCK_UPDATEDATEChanged();
+    #endregion
+		
+		public TBL_STOCK()
+		{
+			this._TBL_PRODUCT = default(EntityRef<TBL_PRODUCT>);
+			this._TBL_USER = default(EntityRef<TBL_USER>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_STOCK", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_STOCK
+		{
+			get
+			{
+				return this._ID_STOCK;
+			}
+			set
+			{
+				if ((this._ID_STOCK != value))
+				{
+					this.OnID_STOCKChanging(value);
+					this.SendPropertyChanging();
+					this._ID_STOCK = value;
+					this.SendPropertyChanged("ID_STOCK");
+					this.OnID_STOCKChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_PRODUCT", DbType="Int NOT NULL")]
+		public int ID_PRODUCT
+		{
+			get
+			{
+				return this._ID_PRODUCT;
+			}
+			set
+			{
+				if ((this._ID_PRODUCT != value))
+				{
+					if (this._TBL_PRODUCT.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_PRODUCTChanging(value);
+					this.SendPropertyChanging();
+					this._ID_PRODUCT = value;
+					this.SendPropertyChanged("ID_PRODUCT");
+					this.OnID_PRODUCTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_INITIAL_QUANTITY", DbType="Int NOT NULL")]
+		public int STOCK_INITIAL_QUANTITY
+		{
+			get
+			{
+				return this._STOCK_INITIAL_QUANTITY;
+			}
+			set
+			{
+				if ((this._STOCK_INITIAL_QUANTITY != value))
+				{
+					this.OnSTOCK_INITIAL_QUANTITYChanging(value);
+					this.SendPropertyChanging();
+					this._STOCK_INITIAL_QUANTITY = value;
+					this.SendPropertyChanged("STOCK_INITIAL_QUANTITY");
+					this.OnSTOCK_INITIAL_QUANTITYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_QUANTITY", DbType="Int NOT NULL")]
+		public int STOCK_QUANTITY
+		{
+			get
+			{
+				return this._STOCK_QUANTITY;
+			}
+			set
+			{
+				if ((this._STOCK_QUANTITY != value))
+				{
+					this.OnSTOCK_QUANTITYChanging(value);
+					this.SendPropertyChanging();
+					this._STOCK_QUANTITY = value;
+					this.SendPropertyChanged("STOCK_QUANTITY");
+					this.OnSTOCK_QUANTITYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_ADJUSTMENT", DbType="Int")]
+		public System.Nullable<int> STOCK_ADJUSTMENT
+		{
+			get
+			{
+				return this._STOCK_ADJUSTMENT;
+			}
+			set
+			{
+				if ((this._STOCK_ADJUSTMENT != value))
+				{
+					this.OnSTOCK_ADJUSTMENTChanging(value);
+					this.SendPropertyChanging();
+					this._STOCK_ADJUSTMENT = value;
+					this.SendPropertyChanged("STOCK_ADJUSTMENT");
+					this.OnSTOCK_ADJUSTMENTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_DATE_PRODUCT", DbType="DateTime NOT NULL")]
+		public System.DateTime STOCK_DATE_PRODUCT
+		{
+			get
+			{
+				return this._STOCK_DATE_PRODUCT;
+			}
+			set
+			{
+				if ((this._STOCK_DATE_PRODUCT != value))
+				{
+					this.OnSTOCK_DATE_PRODUCTChanging(value);
+					this.SendPropertyChanging();
+					this._STOCK_DATE_PRODUCT = value;
+					this.SendPropertyChanged("STOCK_DATE_PRODUCT");
+					this.OnSTOCK_DATE_PRODUCTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_STATE", DbType="Bit NOT NULL")]
+		public bool STOCK_STATE
+		{
+			get
+			{
+				return this._STOCK_STATE;
+			}
+			set
+			{
+				if ((this._STOCK_STATE != value))
+				{
+					this.OnSTOCK_STATEChanging(value);
+					this.SendPropertyChanging();
+					this._STOCK_STATE = value;
+					this.SendPropertyChanged("STOCK_STATE");
+					this.OnSTOCK_STATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_CREATEBY", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string STOCK_CREATEBY
+		{
+			get
+			{
+				return this._STOCK_CREATEBY;
+			}
+			set
+			{
+				if ((this._STOCK_CREATEBY != value))
+				{
+					if (this._TBL_USER.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSTOCK_CREATEBYChanging(value);
+					this.SendPropertyChanging();
+					this._STOCK_CREATEBY = value;
+					this.SendPropertyChanged("STOCK_CREATEBY");
+					this.OnSTOCK_CREATEBYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_UPDATEDBY", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string STOCK_UPDATEDBY
+		{
+			get
+			{
+				return this._STOCK_UPDATEDBY;
+			}
+			set
+			{
+				if ((this._STOCK_UPDATEDBY != value))
+				{
+					this.OnSTOCK_UPDATEDBYChanging(value);
+					this.SendPropertyChanging();
+					this._STOCK_UPDATEDBY = value;
+					this.SendPropertyChanged("STOCK_UPDATEDBY");
+					this.OnSTOCK_UPDATEDBYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_CREATEDATE", DbType="DateTime NOT NULL")]
+		public System.DateTime STOCK_CREATEDATE
+		{
+			get
+			{
+				return this._STOCK_CREATEDATE;
+			}
+			set
+			{
+				if ((this._STOCK_CREATEDATE != value))
+				{
+					this.OnSTOCK_CREATEDATEChanging(value);
+					this.SendPropertyChanging();
+					this._STOCK_CREATEDATE = value;
+					this.SendPropertyChanged("STOCK_CREATEDATE");
+					this.OnSTOCK_CREATEDATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_UPDATEDATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> STOCK_UPDATEDATE
+		{
+			get
+			{
+				return this._STOCK_UPDATEDATE;
+			}
+			set
+			{
+				if ((this._STOCK_UPDATEDATE != value))
+				{
+					this.OnSTOCK_UPDATEDATEChanging(value);
+					this.SendPropertyChanging();
+					this._STOCK_UPDATEDATE = value;
+					this.SendPropertyChanged("STOCK_UPDATEDATE");
+					this.OnSTOCK_UPDATEDATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBL_PRODUCT_TBL_STOCK", Storage="_TBL_PRODUCT", ThisKey="ID_PRODUCT", OtherKey="ID_PRODUCT", IsForeignKey=true)]
+		public TBL_PRODUCT TBL_PRODUCT
+		{
+			get
+			{
+				return this._TBL_PRODUCT.Entity;
+			}
+			set
+			{
+				TBL_PRODUCT previousValue = this._TBL_PRODUCT.Entity;
+				if (((previousValue != value) 
+							|| (this._TBL_PRODUCT.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TBL_PRODUCT.Entity = null;
+						previousValue.TBL_STOCKs.Remove(this);
+					}
+					this._TBL_PRODUCT.Entity = value;
+					if ((value != null))
+					{
+						value.TBL_STOCKs.Add(this);
+						this._ID_PRODUCT = value.ID_PRODUCT;
+					}
+					else
+					{
+						this._ID_PRODUCT = default(int);
+					}
+					this.SendPropertyChanged("TBL_PRODUCT");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBL_USER_TBL_STOCK", Storage="_TBL_USER", ThisKey="STOCK_CREATEBY", OtherKey="ID_USER", IsForeignKey=true)]
+		public TBL_USER TBL_USER
+		{
+			get
+			{
+				return this._TBL_USER.Entity;
+			}
+			set
+			{
+				TBL_USER previousValue = this._TBL_USER.Entity;
+				if (((previousValue != value) 
+							|| (this._TBL_USER.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TBL_USER.Entity = null;
+						previousValue.TBL_STOCKs.Remove(this);
+					}
+					this._TBL_USER.Entity = value;
+					if ((value != null))
+					{
+						value.TBL_STOCKs.Add(this);
+						this._STOCK_CREATEBY = value.ID_USER;
+					}
+					else
+					{
+						this._STOCK_CREATEBY = default(string);
+					}
+					this.SendPropertyChanged("TBL_USER");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -8033,212 +8033,6 @@ namespace ControlApp.DataAccess
 		}
 	}
 	
-	public partial class SP_CRUD_STOCKResult
-	{
-		
-		private int _ID_STOCK;
-		
-		private string _DESCRIP_PRICE;
-		
-		private int _STOCK_INITIAL_QUANTITY;
-		
-		private int _STOCK_QUANTITY;
-		
-		private int _STOCK_ADJUSTMENT;
-		
-		private System.DateTime _STOCK_DATE_PRODUCT;
-		
-		private bool _STOCK_STATE;
-		
-		private string _STOCK_CREATEBY;
-		
-		private string _STOCK_UPDATEDBY;
-		
-		private System.DateTime _STOCK_CREATEDATE;
-		
-		private System.Nullable<System.DateTime> _STOCK_UPDATEDATE;
-		
-		public SP_CRUD_STOCKResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_STOCK", DbType="Int NOT NULL")]
-		public int ID_STOCK
-		{
-			get
-			{
-				return this._ID_STOCK;
-			}
-			set
-			{
-				if ((this._ID_STOCK != value))
-				{
-					this._ID_STOCK = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIP_PRICE", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string DESCRIP_PRICE
-		{
-			get
-			{
-				return this._DESCRIP_PRICE;
-			}
-			set
-			{
-				if ((this._DESCRIP_PRICE != value))
-				{
-					this._DESCRIP_PRICE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_INITIAL_QUANTITY", DbType="Int NOT NULL")]
-		public int STOCK_INITIAL_QUANTITY
-		{
-			get
-			{
-				return this._STOCK_INITIAL_QUANTITY;
-			}
-			set
-			{
-				if ((this._STOCK_INITIAL_QUANTITY != value))
-				{
-					this._STOCK_INITIAL_QUANTITY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_QUANTITY", DbType="Int NOT NULL")]
-		public int STOCK_QUANTITY
-		{
-			get
-			{
-				return this._STOCK_QUANTITY;
-			}
-			set
-			{
-				if ((this._STOCK_QUANTITY != value))
-				{
-					this._STOCK_QUANTITY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_ADJUSTMENT", DbType="Int NOT NULL")]
-		public int STOCK_ADJUSTMENT
-		{
-			get
-			{
-				return this._STOCK_ADJUSTMENT;
-			}
-			set
-			{
-				if ((this._STOCK_ADJUSTMENT != value))
-				{
-					this._STOCK_ADJUSTMENT = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_DATE_PRODUCT", DbType="DateTime NOT NULL")]
-		public System.DateTime STOCK_DATE_PRODUCT
-		{
-			get
-			{
-				return this._STOCK_DATE_PRODUCT;
-			}
-			set
-			{
-				if ((this._STOCK_DATE_PRODUCT != value))
-				{
-					this._STOCK_DATE_PRODUCT = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_STATE", DbType="Bit NOT NULL")]
-		public bool STOCK_STATE
-		{
-			get
-			{
-				return this._STOCK_STATE;
-			}
-			set
-			{
-				if ((this._STOCK_STATE != value))
-				{
-					this._STOCK_STATE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_CREATEBY", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string STOCK_CREATEBY
-		{
-			get
-			{
-				return this._STOCK_CREATEBY;
-			}
-			set
-			{
-				if ((this._STOCK_CREATEBY != value))
-				{
-					this._STOCK_CREATEBY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_UPDATEDBY", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string STOCK_UPDATEDBY
-		{
-			get
-			{
-				return this._STOCK_UPDATEDBY;
-			}
-			set
-			{
-				if ((this._STOCK_UPDATEDBY != value))
-				{
-					this._STOCK_UPDATEDBY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_CREATEDATE", DbType="DateTime NOT NULL")]
-		public System.DateTime STOCK_CREATEDATE
-		{
-			get
-			{
-				return this._STOCK_CREATEDATE;
-			}
-			set
-			{
-				if ((this._STOCK_CREATEDATE != value))
-				{
-					this._STOCK_CREATEDATE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_UPDATEDATE", DbType="DateTime")]
-		public System.Nullable<System.DateTime> STOCK_UPDATEDATE
-		{
-			get
-			{
-				return this._STOCK_UPDATEDATE;
-			}
-			set
-			{
-				if ((this._STOCK_UPDATEDATE != value))
-				{
-					this._STOCK_UPDATEDATE = value;
-				}
-			}
-		}
-	}
-	
 	public partial class SP_CRUD_USERResult
 	{
 		
@@ -8494,6 +8288,212 @@ namespace ControlApp.DataAccess
 				if ((this._USER_UPDATEDATE != value))
 				{
 					this._USER_UPDATEDATE = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_CRUD_STOCKResult
+	{
+		
+		private int _ID_STOCK;
+		
+		private string _DESCRIP_PRICE;
+		
+		private int _STOCK_INITIAL_QUANTITY;
+		
+		private int _STOCK_QUANTITY;
+		
+		private int _STOCK_ADJUSTMENT;
+		
+		private System.DateTime _STOCK_DATE_PRODUCT;
+		
+		private bool _STOCK_STATE;
+		
+		private string _STOCK_CREATEBY;
+		
+		private string _STOCK_UPDATEDBY;
+		
+		private System.DateTime _STOCK_CREATEDATE;
+		
+		private System.Nullable<System.DateTime> _STOCK_UPDATEDATE;
+		
+		public SP_CRUD_STOCKResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_STOCK", DbType="Int NOT NULL")]
+		public int ID_STOCK
+		{
+			get
+			{
+				return this._ID_STOCK;
+			}
+			set
+			{
+				if ((this._ID_STOCK != value))
+				{
+					this._ID_STOCK = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIP_PRICE", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string DESCRIP_PRICE
+		{
+			get
+			{
+				return this._DESCRIP_PRICE;
+			}
+			set
+			{
+				if ((this._DESCRIP_PRICE != value))
+				{
+					this._DESCRIP_PRICE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_INITIAL_QUANTITY", DbType="Int NOT NULL")]
+		public int STOCK_INITIAL_QUANTITY
+		{
+			get
+			{
+				return this._STOCK_INITIAL_QUANTITY;
+			}
+			set
+			{
+				if ((this._STOCK_INITIAL_QUANTITY != value))
+				{
+					this._STOCK_INITIAL_QUANTITY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_QUANTITY", DbType="Int NOT NULL")]
+		public int STOCK_QUANTITY
+		{
+			get
+			{
+				return this._STOCK_QUANTITY;
+			}
+			set
+			{
+				if ((this._STOCK_QUANTITY != value))
+				{
+					this._STOCK_QUANTITY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_ADJUSTMENT", DbType="Int NOT NULL")]
+		public int STOCK_ADJUSTMENT
+		{
+			get
+			{
+				return this._STOCK_ADJUSTMENT;
+			}
+			set
+			{
+				if ((this._STOCK_ADJUSTMENT != value))
+				{
+					this._STOCK_ADJUSTMENT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_DATE_PRODUCT", DbType="DateTime NOT NULL")]
+		public System.DateTime STOCK_DATE_PRODUCT
+		{
+			get
+			{
+				return this._STOCK_DATE_PRODUCT;
+			}
+			set
+			{
+				if ((this._STOCK_DATE_PRODUCT != value))
+				{
+					this._STOCK_DATE_PRODUCT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_STATE", DbType="Bit NOT NULL")]
+		public bool STOCK_STATE
+		{
+			get
+			{
+				return this._STOCK_STATE;
+			}
+			set
+			{
+				if ((this._STOCK_STATE != value))
+				{
+					this._STOCK_STATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_CREATEBY", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string STOCK_CREATEBY
+		{
+			get
+			{
+				return this._STOCK_CREATEBY;
+			}
+			set
+			{
+				if ((this._STOCK_CREATEBY != value))
+				{
+					this._STOCK_CREATEBY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_UPDATEDBY", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string STOCK_UPDATEDBY
+		{
+			get
+			{
+				return this._STOCK_UPDATEDBY;
+			}
+			set
+			{
+				if ((this._STOCK_UPDATEDBY != value))
+				{
+					this._STOCK_UPDATEDBY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_CREATEDATE", DbType="DateTime NOT NULL")]
+		public System.DateTime STOCK_CREATEDATE
+		{
+			get
+			{
+				return this._STOCK_CREATEDATE;
+			}
+			set
+			{
+				if ((this._STOCK_CREATEDATE != value))
+				{
+					this._STOCK_CREATEDATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STOCK_UPDATEDATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> STOCK_UPDATEDATE
+		{
+			get
+			{
+				return this._STOCK_UPDATEDATE;
+			}
+			set
+			{
+				if ((this._STOCK_UPDATEDATE != value))
+				{
+					this._STOCK_UPDATEDATE = value;
 				}
 			}
 		}
